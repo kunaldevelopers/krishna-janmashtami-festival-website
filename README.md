@@ -25,6 +25,7 @@ Beautiful, responsive website celebrating the divine birth of Lord Krishna with 
 ## 📦 Quick Start
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/kunalking001/krishna-janmashtami-festival-website.git
 ```
@@ -36,7 +37,7 @@ That's it! No build process required.
 ## 📱 Responsive Breakpoints
 
 - Mobile: 480px and below
-- Tablet: 768px and below  
+- Tablet: 768px and below
 - Desktop: 1024px and above
 
 ## 🎯 Sections
