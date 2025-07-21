@@ -28,9 +28,127 @@
       .hero-section {
         position: relative;
         width: 100%;
-        height: 100vh;
-        background: url("https://hkmraipur.org/wp-content/uploads/2025/07/ss.jpg")
-          no-repeat center center/cover;
+        height: 70vh;
+        overflow: hidden;
+      }
+
+      .slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .slide.active {
+        opacity: 1;
+      }
+
+      .slide.fade-out {
+        opacity: 0;
+      }
+
+      /* Navigation Arrows */
+      .slider-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: none; /* Hidden */
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .slider-nav:hover {
+        background: rgba(0, 0, 0, 0.7);
+        transform: translateY(-50%) scale(1.1);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      .slider-nav.prev {
+        left: 30px;
+      }
+
+      .slider-nav.next {
+        right: 30px;
+      }
+
+      /* Slider Navigation Dots */
+      .slider-dots {
+        position: absolute;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none; /* Hidden */
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        position: relative;
+      }
+
+      .dot.active {
+        background: rgba(255, 255, 255, 0.9);
+        transform: scale(1.3);
+        border-color: rgba(255, 255, 255, 1);
+      }
+
+      .dot:hover {
+        background: rgba(255, 255, 255, 0.7);
+        transform: scale(1.1);
+      }
+
+      /* Slide Progress Indicator */
+      .slide-progress {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.3);
+        height: 4px;
+        width: 200px;
+        border-radius: 2px;
+        overflow: hidden;
+        z-index: 10;
+        display: none; /* Hidden */
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #ffd700, #ffed4a);
+        width: 0%;
+        transition: width 0.1s linear;
+        border-radius: 2px;
       }
       .hero-text {
         position: absolute;
@@ -152,12 +270,6 @@
 
       /* Mobile Responsive */
       @media screen and (max-width: 768px) {
-        .hero-section {
-          background-image: url("https://hkmraipur.org/wp-content/uploads/2025/07/k1.jpg") !important;
-          background-repeat: no-repeat !important;
-          background-position: center center !important;
-          background-size: cover !important;
-        }
         .hero-text {
           width: 95%;
           bottom: 30px;
@@ -172,6 +284,29 @@
           font-size: 1.4em;
           letter-spacing: 1px;
           word-spacing: 3px;
+        }
+        .slider-dots {
+          bottom: 80px;
+          gap: 10px;
+        }
+        .dot {
+          width: 12px;
+          height: 12px;
+        }
+        .slider-nav {
+          width: 50px;
+          height: 50px;
+          font-size: 16px;
+        }
+        .slider-nav.prev {
+          left: 15px;
+        }
+        .slider-nav.next {
+          right: 15px;
+        }
+        .slide-progress {
+          width: 150px;
+          bottom: 50px;
         }
         .opulence-section {
           flex-direction: column;
@@ -1656,6 +1791,75 @@
   </head>
   <body>
     <div class="hero-section">
+      <div class="slider-container">
+        <div
+          class="slide active"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/8.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/4-1.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/1-1.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/2.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/3.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/7.jpg');
+          "
+        ></div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/6.jpg');
+          "
+        ></div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="slider-nav prev" onclick="heroSlider.prevSlide()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="slider-nav next" onclick="heroSlider.nextSlide()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <!-- Navigation Dots -->
+      <div class="slider-dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+        <span class="dot" data-slide="5"></span>
+        <span class="dot" data-slide="6"></span>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="slide-progress">
+        <div class="progress-bar"></div>
+      </div>
+
       <div class="hero-text">
         <h1 class="hero-title">SRI KRISHNA JANMASHTAMI</h1>
         <p class="hero-subtitle">THE DIVINE APPEARANCE OF THE SUPREME LORD</p>
@@ -2366,6 +2570,168 @@
           arrow.classList.add("fa-chevron-up");
         }
       }
+    </script>
+
+    <!-- Professional Hero Slider JavaScript -->
+    <script>
+      class HeroSlider {
+        constructor() {
+          this.slides = document.querySelectorAll(".slide");
+          this.dots = document.querySelectorAll(".dot");
+          this.progressBar = document.querySelector(".progress-bar");
+          this.currentSlide = 0;
+          this.isAutoPlaying = true;
+          this.autoSlideInterval = null;
+          this.progressInterval = null;
+          this.slideInterval = 3500; // 3.5 seconds per slide
+          this.isTransitioning = false;
+
+          this.init();
+        }
+
+        init() {
+          // Add click events to dots
+          this.dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+              if (!this.isTransitioning) {
+                this.goToSlide(index);
+                this.resetAutoSlide();
+              }
+            });
+          });
+
+          // Start auto sliding
+          this.startAutoSlide();
+          this.startProgress();
+
+          // Handle visibility change
+          document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+              this.pauseAutoSlide();
+            } else {
+              this.resumeAutoSlide();
+            }
+          });
+
+          // Keyboard navigation
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") this.prevSlide();
+            if (e.key === "ArrowRight") this.nextSlide();
+          });
+        }
+
+        goToSlide(slideIndex) {
+          if (this.isTransitioning || slideIndex === this.currentSlide) return;
+
+          this.isTransitioning = true;
+
+          // Remove active classes
+          this.slides[this.currentSlide].classList.remove("active");
+          this.dots[this.currentSlide].classList.remove("active");
+
+          // Add smooth fade-out effect
+          this.slides[this.currentSlide].classList.add("fade-out");
+
+          // Update current slide
+          this.currentSlide = slideIndex;
+
+          // Add active class to new slide and dot with smooth fade-in
+          setTimeout(() => {
+            this.slides.forEach((slide) => slide.classList.remove("fade-out"));
+            this.slides[this.currentSlide].classList.add("active");
+            this.dots[this.currentSlide].classList.add("active");
+          }, 150);
+
+          // Clean up after transition
+          setTimeout(() => {
+            this.isTransitioning = false;
+          }, 1200);
+
+          this.resetProgress();
+        }
+
+        nextSlide() {
+          if (this.isTransitioning) return;
+          const nextIndex = (this.currentSlide + 1) % this.slides.length;
+          this.goToSlide(nextIndex);
+        }
+
+        prevSlide() {
+          if (this.isTransitioning) return;
+          const prevIndex =
+            (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+          this.goToSlide(prevIndex);
+        }
+
+        startAutoSlide() {
+          this.autoSlideInterval = setInterval(() => {
+            if (this.isAutoPlaying) {
+              this.nextSlide();
+            }
+          }, this.slideInterval);
+        }
+
+        startProgress() {
+          this.resetProgress();
+          this.progressInterval = setInterval(() => {
+            if (this.isAutoPlaying) {
+              const currentWidth =
+                parseFloat(this.progressBar.style.width) || 0;
+              const increment = 100 / (this.slideInterval / 100);
+              const newWidth = currentWidth + increment;
+
+              if (newWidth >= 100) {
+                this.resetProgress();
+              } else {
+                this.progressBar.style.width = newWidth + "%";
+              }
+            }
+          }, 100);
+        }
+
+        resetProgress() {
+          this.progressBar.style.width = "0%";
+        }
+
+        pauseAutoSlide() {
+          this.isAutoPlaying = false;
+        }
+
+        resumeAutoSlide() {
+          this.isAutoPlaying = true;
+        }
+
+        resetAutoSlide() {
+          clearInterval(this.autoSlideInterval);
+          clearInterval(this.progressInterval);
+          this.startAutoSlide();
+          this.startProgress();
+        }
+      }
+
+      // Initialize slider when DOM is loaded
+      let heroSlider;
+      document.addEventListener("DOMContentLoaded", () => {
+        heroSlider = new HeroSlider();
+      });
+
+      // Preload images for better performance
+      window.addEventListener("load", () => {
+        const imageUrls = [
+          "https://hkmraipur.org/wp-content/uploads/2025/07/8.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/4-1.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/1-1.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/2.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/3.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/7.jpg",
+          "https://hkmraipur.org/wp-content/uploads/2025/07/6.jpg",
+        ];
+
+        imageUrls.forEach((url) => {
+          const img = new Image();
+          img.src = url;
+        });
+      });
     </script>
   </body>
 </html>
