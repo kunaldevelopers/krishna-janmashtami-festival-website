@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Krishna Janmashtami</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
       /* CSS Reset - Remove default margins and padding */
       * {
@@ -1199,6 +1203,294 @@
         }
       }
 
+      /* Choose Your Seva Section */
+      .choose-seva-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8f5f0 0%, #ede4d3 100%);
+        padding: 80px 50px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      .seva-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .seva-main-title {
+        font-size: 3.5em;
+        font-weight: bold;
+        color: #2c1810;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .seva-subtitle {
+        font-size: 1.3em;
+        color: #4a3426;
+        margin-bottom: 40px;
+        line-height: 1.5;
+      }
+      .seva-quote {
+        background: rgba(255, 215, 0, 0.1);
+        border-left: 4px solid #ffd700;
+        padding: 25px;
+        margin: 40px auto;
+        border-radius: 10px;
+        max-width: 900px;
+        text-align: left;
+      }
+      .seva-quote-sanskrit {
+        font-size: 1.2em;
+        color: #2c1810;
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+      .seva-quote-english {
+        font-size: 1.1em;
+        color: #4a3426;
+        margin-bottom: 8px;
+      }
+      .seva-quote-reference {
+        font-size: 0.9em;
+        color: #800000;
+        font-weight: bold;
+        text-align: right;
+      }
+      .seva-categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 50px;
+      }
+      .seva-category {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid #e8dcc6;
+      }
+      .seva-category:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+      .seva-header {
+        background: linear-gradient(135deg, #2c1810 0%, #4a3426 100%);
+        color: white;
+        padding: 20px 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+      .seva-header:hover {
+        background: linear-gradient(135deg, #4a3426 0%, #5a412e 100%);
+      }
+      .seva-header-content {
+        display: flex;
+        width: 90%;
+      }
+      .seva-icon {
+        font-size: 24px;
+        color: #d4b896;
+        width: 40px;
+        text-align: left;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .seva-text-content {
+        display: flex;
+        flex-direction: column;
+        padding-left: 5px;
+        flex: 1;
+      }
+      .seva-title {
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+        color: white;
+        line-height: 1.2;
+      }
+      .seva-description {
+        font-size: 0.9em;
+        opacity: 0.9;
+        margin: 0;
+        color: #e8dcc6;
+        line-height: 1.4;
+      }
+      .seva-arrow {
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+        color: #d4b896;
+      }
+      .seva-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: #fafafa;
+      }
+      .seva-content.active {
+        max-height: 1000px;
+      }
+      .seva-content-inner {
+        padding: 30px;
+      }
+      .seva-item {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-left: 4px solid #d4b896;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+      .seva-item:last-child {
+        margin-bottom: 0;
+      }
+      .seva-item-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #2c1810;
+        margin-bottom: 8px;
+      }
+      .seva-item-description {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+      .donation-label {
+        font-size: 1em;
+        color: #4a3426;
+        margin-bottom: 10px;
+        margin-top: 15px;
+        font-weight: 600;
+        text-align: center;
+      }
+      .donation-amounts {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+      }
+      .donation-btn {
+        background: #800000;
+        color: #ffecbc;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 7px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        min-width: 100px;
+        justify-content: center;
+      }
+      .donation-btn:hover {
+        background: #9a0000;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      .donation-btn:before {
+        content: "₹";
+        font-weight: bold;
+      }
+
+      /* Important Information Section */
+      .important-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 50px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e8dcc6;
+      }
+      .info-section h3 {
+        font-size: 1.4em;
+        color: #2c1810;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .info-section ul {
+        list-style: none;
+        padding: 0;
+      }
+      .info-section li {
+        font-size: 1em;
+        color: #4a3426;
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+        line-height: 1.4;
+      }
+      .info-section li:before {
+        content: "•";
+        color: #d4b896;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+
+      /* Responsive for Seva Section */
+      @media (max-width: 768px) {
+        .choose-seva-section {
+          padding: 50px 20px;
+        }
+        .seva-main-title {
+          font-size: 2.5em;
+        }
+        .seva-header {
+          padding: 15px 20px;
+        }
+        .seva-title {
+          font-size: 1.2em;
+        }
+        .seva-content-inner {
+          padding: 20px;
+        }
+        .important-info {
+          grid-template-columns: 1fr;
+          gap: 25px;
+          padding: 20px;
+        }
+        .donation-amounts {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .choose-seva-section {
+          padding: 30px 15px;
+        }
+        .seva-main-title {
+          font-size: 2em;
+        }
+        .seva-header {
+          padding: 12px 15px;
+        }
+        .seva-title {
+          font-size: 1.1em;
+        }
+        .seva-description {
+          font-size: 0.85em;
+        }
+        .donation-btn {
+          padding: 10px 16px;
+          min-width: 80px;
+          font-size: 0.9em;
+          font-size: 0.9em;
+        }
+      }
+
       /* Experience Divine Joy Section */
       .divine-joy-section {
         position: relative;
@@ -1331,6 +1623,35 @@
           max-width: 300px;
         }
       }
+
+      /* Additional fixes for seva alignment */
+      .seva-header {
+        position: relative;
+      }
+
+      .seva-header-content {
+        display: grid !important;
+        grid-template-columns: 40px 1fr;
+        align-items: start;
+        width: 85%;
+      }
+
+      .seva-icon {
+        margin-top: 3px;
+        grid-column: 1;
+      }
+
+      .seva-text-content {
+        grid-column: 2;
+        padding-left: 5px;
+      }
+
+      .seva-arrow {
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     </style>
   </head>
   <body>
@@ -1371,7 +1692,7 @@
       </div>
       <div class="opulence-image">
         <img
-          src="https://t4.ftcdn.net/jpg/07/24/54/37/360_F_724543702_X6g0dRWzWtEFPWXoiHAzXwZWnG3xKLxp.jpg"
+          src="https://hkmraipur.org/wp-content/uploads/2025/07/krishna-jii2.jpg"
           alt="India Gate illuminated at night"
         />
       </div>
@@ -1713,6 +2034,275 @@
       </div>
     </div>
 
+    <div class="choose-seva-section">
+      <div class="seva-container">
+        <h2 class="seva-main-title">Choose Your Seva</h2>
+        <p class="seva-subtitle">
+          Select from various spiritual services and contribute to the divine
+          celebration
+        </p>
+
+        <div class="seva-quote">
+          <div class="seva-quote-sanskrit">
+            "यत्करोषि यदश्नासि यज्जुहोषि ददासि यत् । यत्तपस्यसि कौन्तेय
+            तत्कुरुष्व मदर्पणम् ।।"
+          </div>
+          <div class="seva-quote-english">
+            Whatever you do, whatever you eat, whatever you offer in sacrifice,
+            whatever you give away, whatever austerities you practice—do that as
+            an offering to Me.
+          </div>
+          <div class="seva-quote-reference">— Bhagavad Gita 9.27</div>
+        </div>
+
+        <div class="seva-categories">
+          <!-- Abhishekam Seva -->
+          <div class="seva-category">
+            <div class="seva-header" onclick="toggleSeva(this)">
+              <div class="seva-header-content">
+                <i class="fas fa-heart seva-icon"></i>
+                <div class="seva-text-content">
+                  <h3 class="seva-title">Abhishekam Seva</h3>
+                  <p class="seva-description">
+                    Sacred bathing ceremony of Sri Krishna with milk, honey, and
+                    sacred waters
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-chevron-down seva-arrow"></i>
+            </div>
+            <div class="seva-content">
+              <div class="seva-content-inner">
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Milk Abhishekam</h4>
+                  <p class="seva-item-description">
+                    Pure cow milk abhishekam for the divine Lord
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                    <button class="donation-btn">5001</button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Panchamrit Abhishekam</h4>
+                  <p class="seva-item-description">
+                    Five nectars abhishekam with milk, yogurt, ghee, honey, and
+                    sugar
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                    <button class="donation-btn">5001</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flower Decoration Seva -->
+          <div class="seva-category">
+            <div class="seva-header" onclick="toggleSeva(this)">
+              <div class="seva-header-content">
+                <i class="fas fa-heart seva-icon"></i>
+                <div class="seva-text-content">
+                  <h3 class="seva-title">Flower Decoration Seva</h3>
+                  <p class="seva-description">
+                    Beautiful floral decorations for the divine altar
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-chevron-down seva-arrow"></i>
+            </div>
+            <div class="seva-content">
+              <div class="seva-content-inner">
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Lotus Decoration</h4>
+                  <p class="seva-item-description">
+                    Sacred lotus decorations for the altar
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Marigold Decoration</h4>
+                  <p class="seva-item-description">
+                    Vibrant marigold garlands and decorations
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">251</button>
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sri Vigraha Seva -->
+          <div class="seva-category">
+            <div class="seva-header" onclick="toggleSeva(this)">
+              <div class="seva-header-content">
+                <i class="fas fa-heart seva-icon"></i>
+                <div class="seva-text-content">
+                  <h3 class="seva-title">Sri Vigraha Seva</h3>
+                  <p class="seva-description">
+                    Direct service to the sacred deity forms
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-chevron-down seva-arrow"></i>
+            </div>
+            <div class="seva-content">
+              <div class="seva-content-inner">
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Deity Dressing Seva</h4>
+                  <p class="seva-item-description">
+                    Beautiful clothing and ornaments for the deities
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                    <button class="donation-btn">5001</button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Arti Seva</h4>
+                  <p class="seva-item-description">
+                    Participate in the sacred arti ceremony
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Annadana Seva -->
+          <div class="seva-category">
+            <div class="seva-header" onclick="toggleSeva(this)">
+              <div class="seva-header-content">
+                <i class="fas fa-heart seva-icon"></i>
+                <div class="seva-text-content">
+                  <h3 class="seva-title">Annadana Seva</h3>
+                  <p class="seva-description">
+                    Sacred food distribution to devotees and the needy
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-chevron-down seva-arrow"></i>
+            </div>
+            <div class="seva-content">
+              <div class="seva-content-inner">
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Prasadam Distribution</h4>
+                  <p class="seva-item-description">
+                    Distribute sacred prasadam to all attendees
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                    <button class="donation-btn">5001</button>
+                    <button class="donation-btn">10001</button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Feast Sponsorship</h4>
+                  <p class="seva-item-description">
+                    Sponsor the complete feast for devotees
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">5001</button>
+                    <button class="donation-btn">10001</button>
+                    <button class="donation-btn">21001</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Other Sevas -->
+          <div class="seva-category">
+            <div class="seva-header" onclick="toggleSeva(this)">
+              <div class="seva-header-content">
+                <i class="fas fa-heart seva-icon"></i>
+                <div class="seva-text-content">
+                  <h3 class="seva-title">Other Sevas</h3>
+                  <p class="seva-description">
+                    Various other spiritual services
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-chevron-down seva-arrow"></i>
+            </div>
+            <div class="seva-content">
+              <div class="seva-content-inner">
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Deepam (Lighting) Seva</h4>
+                  <p class="seva-item-description">
+                    Oil lamps and decorative lighting
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">251</button>
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Kirtan Seva</h4>
+                  <p class="seva-item-description">
+                    Support devotional music and singing
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button class="donation-btn">501</button>
+                    <button class="donation-btn">1001</button>
+                    <button class="donation-btn">2001</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="important-info">
+          <div class="info-section">
+            <h3>Tax Benefits</h3>
+            <ul>
+              <li>All donations are eligible for tax exemption under 80G</li>
+              <li>Digital receipts will be sent to your email</li>
+              <li>Keep receipts for tax filing purposes</li>
+            </ul>
+          </div>
+          <div class="info-section">
+            <h3>How Donations Help</h3>
+            <ul>
+              <li>Support beautiful deity decorations and ceremonies</li>
+              <li>Provide prasadam to thousands of devotees</li>
+              <li>Maintain temple facilities and programs</li>
+              <li>Spread Krishna consciousness in the community</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="divine-joy-section">
       <div class="joy-container">
         <div class="joy-content">
@@ -1743,5 +2333,39 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function toggleSeva(header) {
+        const content = header.nextElementSibling;
+        const arrow = header.querySelector(".seva-arrow");
+        const isActive = content.classList.contains("active");
+
+        // Close all other open sevas
+        document
+          .querySelectorAll(".seva-content.active")
+          .forEach((activeContent) => {
+            if (activeContent !== content) {
+              activeContent.classList.remove("active");
+              const otherArrow =
+                activeContent.previousElementSibling.querySelector(
+                  ".seva-arrow"
+                );
+              otherArrow.classList.remove("fa-chevron-up");
+              otherArrow.classList.add("fa-chevron-down");
+            }
+          });
+
+        // Toggle current seva
+        if (isActive) {
+          content.classList.remove("active");
+          arrow.classList.remove("fa-chevron-up");
+          arrow.classList.add("fa-chevron-down");
+        } else {
+          content.classList.add("active");
+          arrow.classList.remove("fa-chevron-down");
+          arrow.classList.add("fa-chevron-up");
+        }
+      }
+    </script>
   </body>
 </html>
