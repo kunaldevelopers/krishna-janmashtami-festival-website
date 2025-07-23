@@ -8,7 +8,11 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/create-order",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/verify-payment",
       "dest": "/server.js"
     },
     {
