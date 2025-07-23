@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
       /* CSS Reset - Remove default margins and padding */
       * {
@@ -1556,6 +1557,125 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         border: 1px solid #e8dcc6;
       }
+
+      /* Modern Notification Styles */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        transform: translateX(450px);
+        opacity: 0;
+        transition: all 0.4s ease;
+        font-family: Arial, sans-serif;
+      }
+
+      .notification.show {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .notification.success {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border-left: 5px solid #155724;
+      }
+
+      .notification.error {
+        background: linear-gradient(135deg, #dc3545, #fd7e14);
+        color: white;
+        border-left: 5px solid #721c24;
+      }
+
+      .notification-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      .notification-icon {
+        margin-right: 10px;
+        font-size: 1.3em;
+      }
+
+      .notification-title {
+        flex: 1;
+      }
+
+      .notification-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 10px;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+      }
+
+      .notification-close:hover {
+        opacity: 1;
+      }
+
+      .notification-body {
+        font-size: 0.95em;
+        line-height: 1.4;
+        margin-bottom: 10px;
+      }
+
+      .notification-details {
+        font-size: 0.85em;
+        opacity: 0.9;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 10px;
+        margin-top: 10px;
+      }
+
+      .notification-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 0 0 12px 12px;
+        overflow: hidden;
+      }
+
+      .notification-progress-bar {
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        width: 100%;
+        transform: translateX(-100%);
+        animation: progressBar 5s linear forwards;
+      }
+
+      @keyframes progressBar {
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        .notification {
+          right: 10px;
+          left: 10px;
+          max-width: none;
+          transform: translateY(-100px);
+          top: 10px;
+        }
+
+        .notification.show {
+          transform: translateY(0);
+        }
+      }
       .info-section h3 {
         font-size: 1.4em;
         color: #2c1810;
@@ -1781,6 +1901,7 @@
       .seva-icon {
         margin-top: 3px;
         grid-column: 1;
+        font-size: 1.5em;
       }
 
       .seva-text-content {
@@ -1793,6 +1914,117 @@
         right: 30px;
         top: 50%;
         transform: translateY(-50%);
+      }
+
+      /* Debugging CSS for seva sections */
+      .seva-categories * {
+        box-sizing: border-box;
+      }
+
+      .seva-category {
+        margin-bottom: 25px !important;
+        border: 3px solid #c9a876 !important;
+        border-radius: 15px !important;
+        background: #ffffff !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease !important;
+        overflow: hidden !important;
+      }
+
+      .seva-header {
+        padding: 25px 30px !important;
+        cursor: pointer !important;
+        border-radius: 15px 15px 0 0 !important;
+        background: linear-gradient(
+          135deg,
+          #2c1810 0%,
+          #4a3426 100%
+        ) !important;
+        color: white !important;
+        transition: all 0.3s ease !important;
+        min-height: 90px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+      }
+
+      .seva-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: white;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .seva-content.active {
+        max-height: 2000px; /* Increased for better content display */
+        overflow: visible;
+      }
+
+      .seva-item {
+        padding: 25px;
+        margin: 0;
+        border: none;
+        background: white;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .seva-item:last-child {
+        border-bottom: none;
+      }
+
+      .seva-item-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #2c1810;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .seva-item-description {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        display: block;
+      }
+
+      /* Ensure seva sections are visible with proper styling */
+      .seva-category {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        background: #ffffff !important;
+        border-radius: 15px !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+        border: 2px solid #d4b896 !important;
+        margin-bottom: 25px !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease !important;
+      }
+
+      .seva-category:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35) !important;
+        border-color: #c9a876 !important;
+      }
+
+      .seva-content {
+        overflow: visible !important;
+        background: #fafafa !important;
+        border-top: 1px solid #e8dcc6 !important;
+      }
+
+      .seva-item {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        background: white !important;
+        margin: 15px !important;
+        padding: 20px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        border: 1px solid #e8dcc6 !important;
       }
     </style>
   </head>
@@ -2267,11 +2499,11 @@
         </div>
 
         <div class="seva-categories">
-          <!-- Abhishekam Seva -->
+          <!-- 💧 Abhishekam Seva -->
           <div class="seva-category">
             <div class="seva-header" onclick="toggleSeva(this)">
               <div class="seva-header-content">
-                <i class="fas fa-heart seva-icon"></i>
+                <span class="seva-icon">💧</span>
                 <div class="seva-text-content">
                   <h3 class="seva-title">Abhishekam Seva</h3>
                   <p class="seva-description">
@@ -2285,40 +2517,114 @@
             <div class="seva-content">
               <div class="seva-content-inner">
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Milk Abhishekam</h4>
+                  <h4 class="seva-item-title">Kalasha Abhishek (Yajaman)</h4>
                   <p class="seva-item-description">
-                    Pure cow milk abhishekam for the divine Lord
+                    Special Kalasha abhishekam with complete ritual ceremony
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
-                    <button class="donation-btn">5001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Abhishekam Seva', 'Kalasha Abhishek (Yajaman)')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(25001, 'Abhishekam Seva', 'Kalasha Abhishek (Yajaman)')"
+                    >
+                      25001
+                    </button>
                   </div>
                 </div>
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Panchamrit Abhishekam</h4>
+                  <h4 class="seva-item-title">
+                    Maha Abhishek (Morning - 5:30 am)
+                  </h4>
                   <p class="seva-item-description">
-                    Five nectars abhishekam with milk, yogurt, ghee, honey, and
-                    sugar
+                    Early morning sacred abhishekam ceremony
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
-                    <button class="donation-btn">5001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Abhishekam Seva', 'Maha Abhishek (Morning - 5:30 am)')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7501, 'Abhishekam Seva', 'Maha Abhishek (Morning - 5:30 am)')"
+                    >
+                      7501
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">
+                    Maha Abhishek (Midnight - 10:30 pm)
+                  </h4>
+                  <p class="seva-item-description">
+                    Special midnight abhishekam ceremony for Janmashtami
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Abhishekam Seva', 'Maha Abhishek (Midnight - 10:30 pm)')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Abhishekam Seva', 'Maha Abhishek (Midnight - 10:30 pm)')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Abhishekam Seva', 'Maha Abhishek (Midnight - 10:30 pm)')"
+                    >
+                      21001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Srila Prabhupada Abhishek</h4>
+                  <p class="seva-item-description">
+                    Sacred abhishekam for Srila Prabhupada
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(3501, 'Abhishekam Seva', 'Srila Prabhupada Abhishek')"
+                    >
+                      3501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Abhishekam Seva', 'Srila Prabhupada Abhishek')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11000, 'Abhishekam Seva', 'Srila Prabhupada Abhishek')"
+                    >
+                      11000
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Flower Decoration Seva -->
+          <!-- 🌸 Flower Decoration Seva -->
           <div class="seva-category">
             <div class="seva-header" onclick="toggleSeva(this)">
               <div class="seva-header-content">
-                <i class="fas fa-heart seva-icon"></i>
+                <span class="seva-icon">🌸</span>
                 <div class="seva-text-content">
                   <h3 class="seva-title">Flower Decoration Seva</h3>
                   <p class="seva-description">
@@ -2331,38 +2637,206 @@
             <div class="seva-content">
               <div class="seva-content-inner">
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Lotus Decoration</h4>
+                  <h4 class="seva-item-title">Phool Bangla Seva</h4>
                   <p class="seva-item-description">
-                    Sacred lotus decorations for the altar
+                    Elaborate flower palace decoration for the deities
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Flower Decoration Seva', 'Phool Bangla Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Flower Decoration Seva', 'Phool Bangla Seva')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Flower Decoration Seva', 'Phool Bangla Seva')"
+                    >
+                      21001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(31001, 'Flower Decoration Seva', 'Phool Bangla Seva')"
+                    >
+                      31001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(51001, 'Flower Decoration Seva', 'Phool Bangla Seva')"
+                    >
+                      51001
+                    </button>
                   </div>
                 </div>
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Marigold Decoration</h4>
+                  <h4 class="seva-item-title">Pushpa Sringar Seva</h4>
                   <p class="seva-item-description">
-                    Vibrant marigold garlands and decorations
+                    Beautiful flower adornment and decoration service
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">251</button>
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7551, 'Flower Decoration Seva', 'Pushpa Sringar Seva')"
+                    >
+                      7551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10551, 'Flower Decoration Seva', 'Pushpa Sringar Seva')"
+                    >
+                      10551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15551, 'Flower Decoration Seva', 'Pushpa Sringar Seva')"
+                    >
+                      15551
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Pushpa Abhishek Seva</h4>
+                  <p class="seva-item-description">
+                    Flower-based abhishekam ceremony
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Flower Decoration Seva', 'Pushpa Abhishek Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Flower Decoration Seva', 'Pushpa Abhishek Seva')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Flower Decoration Seva', 'Pushpa Abhishek Seva')"
+                    >
+                      21001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Deity Garland Seva</h4>
+                  <p class="seva-item-description">
+                    Sacred garlands for the deities
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7551, 'Flower Decoration Seva', 'Deity Garland Seva')"
+                    >
+                      7551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10551, 'Flower Decoration Seva', 'Deity Garland Seva')"
+                    >
+                      10551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15551, 'Flower Decoration Seva', 'Deity Garland Seva')"
+                    >
+                      15551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Flower Decoration Seva', 'Deity Garland Seva')"
+                    >
+                      21001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Pallaki Decoration Seva</h4>
+                  <p class="seva-item-description">
+                    Beautiful decoration for the divine palanquin
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2551, 'Flower Decoration Seva', 'Pallaki Decoration Seva')"
+                    >
+                      2551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5551, 'Flower Decoration Seva', 'Pallaki Decoration Seva')"
+                    >
+                      5551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7551, 'Flower Decoration Seva', 'Pallaki Decoration Seva')"
+                    >
+                      7551
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10551, 'Flower Decoration Seva', 'Pallaki Decoration Seva')"
+                    >
+                      10551
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Jhulan Decoration Seva</h4>
+                  <p class="seva-item-description">
+                    Swing decoration for Krishna's Jhulan Utsav
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2101, 'Flower Decoration Seva', 'Jhulan Decoration Seva')"
+                    >
+                      2101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5101, 'Flower Decoration Seva', 'Jhulan Decoration Seva')"
+                    >
+                      5101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7101, 'Flower Decoration Seva', 'Jhulan Decoration Seva')"
+                    >
+                      7101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10101, 'Flower Decoration Seva', 'Jhulan Decoration Seva')"
+                    >
+                      10101
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Sri Vigraha Seva -->
+          <!-- 🌼 Sri Vigraha Seva -->
           <div class="seva-category">
             <div class="seva-header" onclick="toggleSeva(this)">
               <div class="seva-header-content">
-                <i class="fas fa-heart seva-icon"></i>
+                <span class="seva-icon">🌼</span>
                 <div class="seva-text-content">
                   <h3 class="seva-title">Sri Vigraha Seva</h3>
                   <p class="seva-description">
@@ -2375,38 +2849,329 @@
             <div class="seva-content">
               <div class="seva-content-inner">
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Deity Dressing Seva</h4>
+                  <h4 class="seva-item-title">Poshak Seva (All Deities)</h4>
                   <p class="seva-item-description">
-                    Beautiful clothing and ornaments for the deities
+                    Beautiful clothing service for all deities
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
-                    <button class="donation-btn">5001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Sri Vigraha Seva', 'Poshak Seva (All Deities)')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Sri Vigraha Seva', 'Poshak Seva (All Deities)')"
+                    >
+                      21001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(35001, 'Sri Vigraha Seva', 'Poshak Seva (All Deities)')"
+                    >
+                      35001
+                    </button>
                   </div>
                 </div>
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Arti Seva</h4>
+                  <h4 class="seva-item-title">Poshak Seva (Radha Krishna)</h4>
                   <p class="seva-item-description">
-                    Participate in the sacred arti ceremony
+                    Special clothing service for Radha Krishna
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Sri Vigraha Seva', 'Poshak Seva (Radha Krishna)')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(25001, 'Sri Vigraha Seva', 'Poshak Seva (Radha Krishna)')"
+                    >
+                      25001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(35001, 'Sri Vigraha Seva', 'Poshak Seva (Radha Krishna)')"
+                    >
+                      35001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Abharan Seva (All Deities)</h4>
+                  <p class="seva-item-description">
+                    Ornament and jewelry service for all deities
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Sri Vigraha Seva', 'Abharan Seva (All Deities)')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Sri Vigraha Seva', 'Abharan Seva (All Deities)')"
+                    >
+                      21001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(35001, 'Sri Vigraha Seva', 'Abharan Seva (All Deities)')"
+                    >
+                      35001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Abharan Seva (Radha Krishna)</h4>
+                  <p class="seva-item-description">
+                    Special ornament service for Radha Krishna
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Sri Vigraha Seva', 'Abharan Seva (Radha Krishna)')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(25001, 'Sri Vigraha Seva', 'Abharan Seva (Radha Krishna)')"
+                    >
+                      25001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(35001, 'Sri Vigraha Seva', 'Abharan Seva (Radha Krishna)')"
+                    >
+                      35001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Chappan Bhog Seva</h4>
+                  <p class="seva-item-description">
+                    56 varieties of food offerings to Krishna
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2001, 'Sri Vigraha Seva', 'Chappan Bhog Seva')"
+                    >
+                      2001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Sri Vigraha Seva', 'Chappan Bhog Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10001, 'Sri Vigraha Seva', 'Chappan Bhog Seva')"
+                    >
+                      10001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Sri Vigraha Seva', 'Chappan Bhog Seva')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Sri Vigraha Seva', 'Chappan Bhog Seva')"
+                    >
+                      21001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Naivaidyam Seva</h4>
+                  <p class="seva-item-description">
+                    Daily food offerings to the deities
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(3501, 'Sri Vigraha Seva', 'Naivaidyam Seva')"
+                    >
+                      3501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Sri Vigraha Seva', 'Naivaidyam Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7501, 'Sri Vigraha Seva', 'Naivaidyam Seva')"
+                    >
+                      7501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10001, 'Sri Vigraha Seva', 'Naivaidyam Seva')"
+                    >
+                      10001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Sri Vigraha Seva', 'Naivaidyam Seva')"
+                    >
+                      15001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Pallaki Seva</h4>
+                  <p class="seva-item-description">
+                    Divine palanquin service for the deities
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2101, 'Sri Vigraha Seva', 'Pallaki Seva')"
+                    >
+                      2101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(3101, 'Sri Vigraha Seva', 'Pallaki Seva')"
+                    >
+                      3101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5101, 'Sri Vigraha Seva', 'Pallaki Seva')"
+                    >
+                      5101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10101, 'Sri Vigraha Seva', 'Pallaki Seva')"
+                    >
+                      10101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15101, 'Sri Vigraha Seva', 'Pallaki Seva')"
+                    >
+                      15101
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Makhan Mishri Seva</h4>
+                  <p class="seva-item-description">
+                    Butter and sugar candy offerings, Krishna's favorite
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(101, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(201, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      201
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1008, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      1008
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1501, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      1501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2501, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      2501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Sri Vigraha Seva', 'Makhan Mishri Seva')"
+                    >
+                      5001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Tulasi Archana Seva</h4>
+                  <p class="seva-item-description">
+                    Sacred Tulasi worship and offerings
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Sri Vigraha Seva', 'Tulasi Archana Seva')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1008, 'Sri Vigraha Seva', 'Tulasi Archana Seva')"
+                    >
+                      1008
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1501, 'Sri Vigraha Seva', 'Tulasi Archana Seva')"
+                    >
+                      1501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2501, 'Sri Vigraha Seva', 'Tulasi Archana Seva')"
+                    >
+                      2501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Sri Vigraha Seva', 'Tulasi Archana Seva')"
+                    >
+                      5001
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Annadana Seva -->
+          <!-- 🍛 Annadana Seva -->
           <div class="seva-category">
             <div class="seva-header" onclick="toggleSeva(this)">
               <div class="seva-header-content">
-                <i class="fas fa-heart seva-icon"></i>
+                <span class="seva-icon">🍛</span>
                 <div class="seva-text-content">
                   <h3 class="seva-title">Annadana Seva</h3>
                   <p class="seva-description">
@@ -2419,43 +3184,185 @@
             <div class="seva-content">
               <div class="seva-content-inner">
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Prasadam Distribution</h4>
+                  <h4 class="seva-item-title">
+                    Anukalpa Feast Distribution (Post Janmashtami)
+                  </h4>
                   <p class="seva-item-description">
-                    Distribute sacred prasadam to all attendees
+                    Complete feast distribution after Janmashtami celebration
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
-                    <button class="donation-btn">5001</button>
-                    <button class="donation-btn">10001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(101, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(201, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      201
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(751, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      751
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1501, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      1501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2501, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      2501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10001, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      10001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Annadana Seva', 'Anukalpa Feast Distribution (Post Janmashtami)')"
+                    >
+                      21001
+                    </button>
                   </div>
                 </div>
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Feast Sponsorship</h4>
+                  <h4 class="seva-item-title">Khichdi Distribution</h4>
                   <p class="seva-item-description">
-                    Sponsor the complete feast for devotees
+                    Sacred khichdi prasadam distribution
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">5001</button>
-                    <button class="donation-btn">10001</button>
-                    <button class="donation-btn">21001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(751, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      751
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1101, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      1101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2101, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      2101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5101, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      5101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(21001, 'Annadana Seva', 'Khichdi Distribution')"
+                    >
+                      21001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Halwa Distribution</h4>
+                  <p class="seva-item-description">
+                    Sweet halwa prasadam distribution
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(751, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      751
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1101, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      1101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2101, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      2101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5101, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      5101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(11001, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      11001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Annadana Seva', 'Halwa Distribution')"
+                    >
+                      15001
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Other Sevas -->
+          <!-- 🙏 Other Seva -->
           <div class="seva-category">
             <div class="seva-header" onclick="toggleSeva(this)">
               <div class="seva-header-content">
-                <i class="fas fa-heart seva-icon"></i>
+                <span class="seva-icon">🙏</span>
                 <div class="seva-text-content">
-                  <h3 class="seva-title">Other Sevas</h3>
+                  <h3 class="seva-title">Other Seva</h3>
                   <p class="seva-description">
-                    Various other spiritual services
+                    Various other spiritual and cultural services
                   </p>
                 </div>
               </div>
@@ -2464,27 +3371,201 @@
             <div class="seva-content">
               <div class="seva-content-inner">
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Deepam (Lighting) Seva</h4>
+                  <h4 class="seva-item-title">Cultural Mandap Seva</h4>
                   <p class="seva-item-description">
-                    Oil lamps and decorative lighting
+                    Support for cultural programs and mandap decoration
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">251</button>
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      10001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      15001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(25001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      25001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(50001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      50001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(150001, 'Other Seva', 'Cultural Mandap Seva')"
+                    >
+                      150001
+                    </button>
                   </div>
                 </div>
                 <div class="seva-item">
-                  <h4 class="seva-item-title">Kirtan Seva</h4>
+                  <h4 class="seva-item-title">Krishna Kala Seva</h4>
                   <p class="seva-item-description">
-                    Support devotional music and singing
+                    Support for Krishna's cultural and artistic programs
                   </p>
                   <p class="donation-label">Choose donation amount:</p>
                   <div class="donation-amounts">
-                    <button class="donation-btn">501</button>
-                    <button class="donation-btn">1001</button>
-                    <button class="donation-btn">2001</button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2501, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      2501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5501, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      5501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(7501, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      7501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10501, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      10501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15501, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      15501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(51001, 'Other Seva', 'Krishna Kala Seva')"
+                    >
+                      51001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Bhajan Sandhya Seva</h4>
+                  <p class="seva-item-description">
+                    Support for devotional singing and bhajan programs
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2101, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      2101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(3101, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      3101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5101, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      5101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10101, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      10101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15101, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      15101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(51001, 'Other Seva', 'Bhajan Sandhya Seva')"
+                    >
+                      51001
+                    </button>
+                  </div>
+                </div>
+                <div class="seva-item">
+                  <h4 class="seva-item-title">Gau Seva</h4>
+                  <p class="seva-item-description">
+                    Sacred cow protection and care service
+                  </p>
+                  <p class="donation-label">Choose donation amount:</p>
+                  <div class="donation-amounts">
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(101, 'Other Seva', 'Gau Seva')"
+                    >
+                      101
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(201, 'Other Seva', 'Gau Seva')"
+                    >
+                      201
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(501, 'Other Seva', 'Gau Seva')"
+                    >
+                      501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1008, 'Other Seva', 'Gau Seva')"
+                    >
+                      1008
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(1501, 'Other Seva', 'Gau Seva')"
+                    >
+                      1501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(2501, 'Other Seva', 'Gau Seva')"
+                    >
+                      2501
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(5001, 'Other Seva', 'Gau Seva')"
+                    >
+                      5001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(10001, 'Other Seva', 'Gau Seva')"
+                    >
+                      10001
+                    </button>
+                    <button
+                      class="donation-btn"
+                      onclick="initiatePayment(15001, 'Other Seva', 'Gau Seva')"
+                    >
+                      15001
+                    </button>
                   </div>
                 </div>
               </div>
@@ -2545,6 +3626,7 @@
       </div>
     </div>
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
       function toggleSeva(header) {
         const content = header.nextElementSibling;
@@ -2576,6 +3658,181 @@
           arrow.classList.remove("fa-chevron-down");
           arrow.classList.add("fa-chevron-up");
         }
+      }
+
+      // Payment functionality
+      async function initiatePayment(amount, sevaType, sevaItem) {
+        try {
+          // Show loading state
+          const button = event.target;
+          const originalText = button.innerText;
+          button.innerText = "Processing...";
+          button.disabled = true;
+
+          // Create order
+          const response = await fetch("/create-order", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: amount,
+              sevaType: sevaType,
+              sevaItem: sevaItem,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Failed to create order");
+          }
+
+          // Initialize Razorpay
+          const options = {
+            key: data.key,
+            amount: data.amount,
+            currency: "INR",
+            name: "Krishna Janmashtami Festival",
+            description: `${sevaType} - ${sevaItem}`,
+            order_id: data.order_id,
+            handler: function (response) {
+              verifyPayment(response, sevaType, sevaItem);
+            },
+            prefill: {
+              name: "",
+              email: "",
+              contact: "",
+            },
+            theme: {
+              color: "#d4b896",
+            },
+            modal: {
+              ondismiss: function () {
+                // Reset button state when payment is cancelled
+                button.innerText = originalText;
+                button.disabled = false;
+              },
+            },
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.open();
+
+          // Reset button state
+          button.innerText = originalText;
+          button.disabled = false;
+        } catch (error) {
+          console.error("Payment error:", error);
+          showNotification(
+            "error",
+            "Payment Error",
+            "Unable to initiate payment. Please try again.",
+            error.message
+          );
+
+          // Reset button state
+          const button = event.target;
+          button.innerText =
+            button.getAttribute("data-original-text") || "₹" + amount;
+          button.disabled = false;
+        }
+      }
+
+      async function verifyPayment(response, sevaType, sevaItem) {
+        try {
+          const verifyResponse = await fetch("/verify-payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          const verifyData = await verifyResponse.json();
+
+          if (verifyData.success) {
+            showNotification(
+              "success",
+              "Payment Successful! 🙏",
+              `Thank you for your divine contribution to ${sevaType} - ${sevaItem}. Your devotion has been received with gratitude.`,
+              `Payment ID: ${response.razorpay_payment_id}`
+            );
+          } else {
+            showNotification(
+              "error",
+              "Payment Verification Failed",
+              "There was an issue verifying your payment. Please contact our support team.",
+              "Our team will assist you promptly."
+            );
+          }
+        } catch (error) {
+          console.error("Verification error:", error);
+          showNotification(
+            "error",
+            "Verification Error",
+            "Unable to verify payment due to a technical issue. Please contact support.",
+            "Your payment may have been processed successfully."
+          );
+        }
+      }
+
+      // Modern notification system
+      function showNotification(type, title, message, details = "") {
+        // Remove any existing notifications
+        const existingNotifications =
+          document.querySelectorAll(".notification");
+        existingNotifications.forEach((notification) => {
+          notification.remove();
+        });
+
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+
+        const icon = type === "success" ? "✅" : "❌";
+
+        notification.innerHTML = `
+          <div class="notification-header">
+            <span class="notification-icon">${icon}</span>
+            <span class="notification-title">${title}</span>
+            <button class="notification-close" onclick="closeNotification(this)">×</button>
+          </div>
+          <div class="notification-body">${message}</div>
+          ${details ? `<div class="notification-details">${details}</div>` : ""}
+          <div class="notification-progress">
+            <div class="notification-progress-bar"></div>
+          </div>
+        `;
+
+        // Add to page
+        document.body.appendChild(notification);
+
+        // Show notification with animation
+        setTimeout(() => {
+          notification.classList.add("show");
+        }, 100);
+
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          closeNotification(notification);
+        }, 5000);
+      }
+
+      function closeNotification(element) {
+        const notification = element.closest
+          ? element.closest(".notification")
+          : element;
+        notification.classList.remove("show");
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 400);
       }
     </script>
 
