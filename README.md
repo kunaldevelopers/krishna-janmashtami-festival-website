@@ -82,7 +82,7 @@ The website uses Razorpay for secure payment processing. To set up payments:
 
 #### 👩‍💼 Project Leadership
 
-- **Team Director**: [Neha Mahto](https://www.linkedin.com/in/neha-mahto-454172245/)
+- **Team Manager**: [Neha Mahto](https://www.linkedin.com/in/neha-mahto-454172245/)
 - **Lead Developer**: [Kunal Kumar Pandit](https://www.linkedin.com/in/kunalkumarpandit/)
 - **Contributing Developer**: [Vikky Coder](https://github.com/vikky-coder-hub/)
 - **Organization**: ISKCON (International Society for Krishna Consciousness)
