@@ -1475,15 +1475,7 @@
         background: #fafafa;
       }
       .seva-content.active {
-        max-height: 8000px;
-        overflow: visible;
-        height: auto;
-      }
-      /* Specific fix for Sri Vigraha Seva to ensure Tulasi Archana is visible */
-      .seva-category:nth-child(3) .seva-content.active {
-        max-height: 10000px !important;
-        overflow: visible !important;
-        height: auto !important;
+        max-height: 1000px;
       }
       .seva-content-inner {
         padding: 30px;
@@ -1727,13 +1719,6 @@
         .seva-content-inner {
           padding: 20px;
         }
-        .seva-content.active {
-          max-height: 8000px !important;
-        }
-        /* Extra height for Sri Vigraha Seva on mobile */
-        .seva-category:nth-child(3) .seva-content.active {
-          max-height: 12000px !important;
-        }
         .important-info {
           grid-template-columns: 1fr;
           gap: 25px;
@@ -1759,13 +1744,6 @@
         }
         .seva-description {
           font-size: 0.85em;
-        }
-        .seva-content.active {
-          max-height: 8000px !important;
-        }
-        /* Extra height for Sri Vigraha Seva on smallest screens */
-        .seva-category:nth-child(3) .seva-content.active {
-          max-height: 15000px !important;
         }
         .donation-btn {
           padding: 10px 16px;
@@ -2047,18 +2025,6 @@
         border-radius: 10px !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
         border: 1px solid #e8dcc6 !important;
-      }
-
-      /* Ensure adequate height for seva content when active */
-      .seva-content.active {
-        max-height: 4000px !important;
-        overflow: visible !important;
-      }
-
-      /* Ensure collapsed state works properly */
-      .seva-content:not(.active) {
-        max-height: 0 !important;
-        overflow: hidden !important;
       }
     </style>
   </head>
@@ -3704,20 +3670,17 @@
           button.disabled = true;
 
           // Create order
-          const response = await fetch(
-            "https://janmastmi.vercel.app/create-order",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                amount: amount,
-                sevaType: sevaType,
-                sevaItem: sevaItem,
-              }),
-            }
-          );
+          const response = await fetch("/create-order", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: amount,
+              sevaType: sevaType,
+              sevaItem: sevaItem,
+            }),
+          });
 
           const data = await response.json();
 
@@ -3778,20 +3741,17 @@
 
       async function verifyPayment(response, sevaType, sevaItem) {
         try {
-          const verifyResponse = await fetch(
-            "https://janmastmi.vercel.app/verify-payment",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            }
-          );
+          const verifyResponse = await fetch("/verify-payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
 
           const verifyData = await verifyResponse.json();
 
